@@ -19,4 +19,16 @@ public class ProductRepository {
     public Iterator<Product> findAll(){
         return productData.iterator();
     }
+
+    public Product update(Product updatedProduct) {
+        for (int i = 0; i < productData.size(); i++) {
+            Product initialProduct = productData.get(i);
+            if (initialProduct.getProductId().equals(updatedProduct.getProductId())) {
+                initialProduct.setProductName(updatedProduct.getProductName());
+                initialProduct.setProductQuantity(updatedProduct.getProductQuantity());
+                return initialProduct;
+            }
+        }
+        return null;
+    }
 }
