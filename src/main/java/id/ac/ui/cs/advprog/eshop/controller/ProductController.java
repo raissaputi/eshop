@@ -43,10 +43,10 @@ public class ProductController {
         return "updateProduct";
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public String updateProductPut(@ModelAttribute Product updatedProduct, Model model) {
         service.update(updatedProduct);
-        return "redirect:list";
+        return "redirect:/product/list";
     }
 
 }
