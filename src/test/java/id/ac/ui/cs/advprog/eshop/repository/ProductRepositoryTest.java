@@ -84,6 +84,7 @@ class ProductRepositoryTest {
         assertNotNull(product);
         assertEquals(updatedProduct.getProductName(), result.getProductName());
         assertEquals(updatedProduct.getProductQuantity(), result.getProductQuantity());
+        assertEquals("eb558e9f-1c39-460e-8860-71af6af63bd6", result.getProductId());
 
     }
 
@@ -118,6 +119,51 @@ class ProductRepositoryTest {
     @Test
     void testDeleteNonExistingProduct() {
         boolean isDeleted = productRepository.delete("non-existent-id");
+
+        assertFalse(isDeleted);
+    }
+
+    @Test
+    void testCreateWithNullProductId() {
+        Product product = new Product();
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+
+        Product createdProduct = productRepository.create(product);
+
+        assertNotNull(createdProduct);
+        assertNotNull(createdProduct.getProductId());
+        assertEquals(product.getProductName(), createdProduct.getProductName());
+        assertEquals(product.getProductQuantity(), createdProduct.getProductQuantity());
+    }
+
+    @Test
+    void testUpdateProductWithDifferentId() {
+        Product product = new Product();
+        product.setProductId("existing-id");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        Product updatedProduct = new Product();
+        updatedProduct.setProductId("different-id");
+        updatedProduct.setProductName("Updated Product");
+        updatedProduct.setProductQuantity(50);
+
+        Product result = productRepository.update(updatedProduct);
+
+        assertNull(result);
+    }
+
+    @Test
+    void testDeleteProductWithDifferentId() {
+        Product product = new Product();
+        product.setProductId("existing-id");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+        productRepository.create(product);
+
+        boolean isDeleted = productRepository.delete("different-id");
 
         assertFalse(isDeleted);
     }
