@@ -1,9 +1,10 @@
 package id.ac.ui.cs.advprog.eshop;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication @UtilityClass
 public class EshopApplication {
 
 	public static void main(String[] args) {
