@@ -24,7 +24,7 @@ public class ProductController {
     public String createProductPage(Model model) {
         Product product = new Product();
         model.addAttribute("product", product);
-        return "createProduct";
+        return "CreateProduct";
     }
 
     @PostMapping("/create")
@@ -37,14 +37,14 @@ public class ProductController {
     public String productListPage(Model model) {
         List<Product> allProducts = service.findAll();
         model.addAttribute("products", allProducts);
-        return "productList";
+        return "ProductList";
     }
 
     @GetMapping("/update/{productId}")
     public String updateProductPage(@PathVariable String productId, Model model) {
         Product existingProduct = service.findById(productId);
         model.addAttribute("product", existingProduct);
-        return "updateProduct";
+        return "UpdateProduct";
     }
 
     @PostMapping("/update")
