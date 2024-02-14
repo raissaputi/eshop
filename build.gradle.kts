@@ -6,6 +6,14 @@ plugins {
 	id("org.sonarqube") version "4.4.1.3373"
 }
 
+sonar {
+	properties {
+		property("sonar.projectKey", "raissaputi_eshop")
+		property("sonar.organization", "raissaputi")
+		property("sonar.host.url", "https://sonarcloud.io")
+	}
+}
+
 group = "id.ac.ui.cs.advprog"
 version = "0.0.1-SNAPSHOT"
 
@@ -75,12 +83,9 @@ tasks.test {
 
 tasks.jacocoTestReport {
 	dependsOn(tasks.test)
-}
 
-sonar {
-	properties {
-		property("sonar.projectKey", "raissaputi_eshop")
-		property("sonar.organization", "raissaputi")
-		property("sonar.host.url", "https://sonarcloud.io")
+	reports {
+		html.required = true
+		xml.required = true
 	}
 }
