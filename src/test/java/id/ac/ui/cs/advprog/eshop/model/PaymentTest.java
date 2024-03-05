@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
+import enums.PaymentStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +32,7 @@ public class PaymentTest {
         products.add(product1);
         products.add(product2);
 
-        Order order = new Order("13652556-012a-4c07-b546-54eb1396d79b", products, 1708560000L, "Safira Sudarajat");
+        order = new Order("13652556-012a-4c07-b546-54eb1396d79b", products, 1708560000L, "Safira Sudarajat");
     }
 
     @Test
@@ -80,7 +81,7 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678");
         Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "VOUCHER", paymentData, order);
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
@@ -88,7 +89,7 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234ABC5678999");
         Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "VOUCHER", paymentData, order);
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -96,7 +97,7 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "EEEEE1234ABC5678999");
         Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "VOUCHER", paymentData, order);
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -104,7 +105,7 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOPAAAA1111111");
         Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "VOUCHER", paymentData, order);
-        assertEquals("REJECTED", payment.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -113,7 +114,7 @@ public class PaymentTest {
         paymentData.put("bankName", "mandiri");
         paymentData.put("referenceCode", "abc123");
         Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
@@ -139,7 +140,9 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("bankName", null);
         paymentData.put("referenceCode", "abc123");
-        assertEquals("REJECTED", new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order).getStatus());
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
+        });
     }
 
     @Test
@@ -147,6 +150,8 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("bankName", "mandiri");
         paymentData.put("referenceCode", null);
-        assertEquals("REJECTED", new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order).getStatus());
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
+        });
     }
 }
