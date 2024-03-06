@@ -105,3 +105,43 @@ sudah benar kemudian akan di merge ke branch main dan otomatis deploy ke Paas Ko
 - Terdapat potensi deesain menjadi terlalu kompleks, yang menyebabkan pemborosan waktu dan sumber daya
 
 </details>
+
+<details>
+<summary>Modul 4</summary>
+
+## Reflection
+
+### TDD Reflection
+
+Metode TDD cukup memberikan kontribusi positif terhadap kualitas kode yang saya hasilkan. Alur penulisan 
+program menjadi lebih terarah dan terstruktur. Dengan menulis tes terlebih dahulu, saya terdorong untuk merinci 
+perilaku dan merancang implementasi terlebih dahulu. Walaupun begitu, alur ini cukup membingungkan dan sulit 
+dilakukan. Tanpa mengetahui implementasi yang pasti, pembuatan test jadi cukup menantang.
+
+### F.I.R.S.T. principle
+
+- **Fast**
+
+   _Unit Test_ dijalankan dengan cepat, memberikan umpan balik langsung selama pengembangan dan tidak menggangu 
+  workflow. Namun sepertinya beberapa fitur masih memiliki terlalu banyak test.
+
+- **Isolated/Independent**
+
+  Setiap tes bersifat independen, artinya keberhasilan atau kegagalan satu tes tidak memengaruhi yang lain. _Unit 
+  test_ dan _functional test_ juga dipisahkan.
+
+- **Repeatable**
+
+   Ya, _unit tests_ dirancang untuk dapat diulang.
+
+- **Self-Validating**
+
+   Ya, dengan assertion, dapat terlihat masalah pada program ketika sebuah tes gagal. Jika semua assertion pass, tes 
+  dianggap berhasil. Jika ada assertion yang gagal, tes dianggap gagal.
+
+- **Thorough/Timely**
+
+  _Unit test_ _thorough_ dan _timely_ karena mencakup semua skenario positif dan negatif, serta mengatasi semua 
+  kemungkinan kesalahan dan hasil.
+
+</details>
