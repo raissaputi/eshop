@@ -69,3 +69,39 @@ Selain itu PMD dalam workflow lain menjalankan pengujian keamanan dan analisis k
 sudah benar kemudian akan di merge ke branch main dan otomatis deploy ke Paas Koyeb.
 
 </details>
+<details>
+<summary>Modul 3</summary>
+
+## Reflection
+
+### SOLID Principles
+
+1. Single Responsibility Principle - __SRP__
+
+   Setiap kelas memiliki satu tanggung jawab. Sebagai contoh, ProductController dan CarController masing-masing 
+   menangani HTTP request yang berbeda untuk entitas masing-masing.
+
+2. Open/Closed Principle - __OCP__
+   
+   Kelas ProductServiceImpl dan CarServiceImpl dirancang untuk dapat diperluas tetapi tertutup untuk modifikasi. 
+   Fungsionalitasnya dapat diperluas dengan menambahkan metode atau kelas baru, tetapi yang sudah ada tidak perlu 
+   dimodifikasi.
+
+3. Dependency Inversion Principle - __DIP__
+
+   Suatu kelas harus bergantung pada abstraksi atau antarmuka, bukan implementasi konkret. Car Service dan Product 
+   Service bergantung pada suatu interface dan tidak bergantung pada implementasi konkret dari repository.
+
+### Advantages
+
+- Kode lebih terstruktur dan mudah dipahami
+- Penambahan fungsi lebih mudah dilakukan tanpa perlu mengubah fungsi yang sudah ada
+- Mengurangi potensi masalah pada kode
+- Memudahkan testing
+
+### Disadvantages
+
+- Memerlukan usaha yang lebih kompleks pada desain awal
+- Terdapat potensi deesain menjadi terlalu kompleks, yang menyebabkan pemborosan waktu dan sumber daya
+
+</details>
