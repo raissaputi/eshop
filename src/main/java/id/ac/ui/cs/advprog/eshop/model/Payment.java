@@ -64,7 +64,7 @@ public class Payment {
         String address = paymentData.get("address");
         String deliveryFee = paymentData.get("deliveryFee");
         if (address == null || deliveryFee == null || address.isEmpty() || deliveryFee.isEmpty()) {
-            throw new IllegalArgumentException();
+            setStatus(PaymentStatus.REJECTED.getValue());
         }
     }
 
