@@ -121,18 +121,16 @@ public class PaymentTest {
     void testCreatePaymentCodMissingAddress() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("deliveryFee", "123");
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
-        });
+        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
     void testCreatePaymentCodMissingDeliveryFee() {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("address", "kujang");
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
-        });
+        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -140,9 +138,8 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("address", null);
         paymentData.put("deliveryFee", "123");
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
-        });
+        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 
     @Test
@@ -150,8 +147,7 @@ public class PaymentTest {
         Map<String, String> paymentData = new HashMap<>();
         paymentData.put("address", "kujang");
         paymentData.put("deliveryFee", null);
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
-        });
+        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
+        assertEquals(PaymentStatus.REJECTED.getValue(), payment.getStatus());
     }
 }
