@@ -90,7 +90,7 @@ public class PaymentServiceImplTest {
         when(orderService.updateStatus(order.getId(), "SUCCESS")).thenReturn(order);
         when(paymentRepository.save(any(Payment.class))).thenReturn(payment);
 
-        Payment result = paymentService.setStatus(payment.getId(), "SUCCESS");
+        Payment result = paymentService.setStatus(payment, "SUCCESS");
 
         assertNotNull(result);
         assertEquals("SUCCESS", result.getStatus());
@@ -106,24 +106,12 @@ public class PaymentServiceImplTest {
         when(orderService.updateStatus(order.getId(), "FAILED")).thenReturn(order);
         when(paymentRepository.save(any(Payment.class))).thenReturn(payment);
 
-        Payment result = paymentService.setStatus(payment.getId(), "REJECTED");
+        Payment result = paymentService.setStatus(payment, "REJECTED");
 
         assertNotNull(result);
         assertEquals("REJECTED", result.getStatus());
         verify(orderService, times(1)).updateStatus(order.getId(), "FAILED");
         verify(paymentRepository, times(1)).save(any(Payment.class));
-    }
-
-    @Test
-    void testSetStatusInvalidPaymentId() {
-        when(paymentRepository.findById("zczc")).thenReturn(null);
-
-        assertThrows(NoSuchElementException.class, () -> {
-            paymentService.setStatus("zczc", "SUCCESS");
-        });
-
-        verify(orderService, times(0)).updateStatus(anyString(), anyString());
-        verify(paymentRepository, times(0)).save(any(Payment.class));
     }
 
     @Test
