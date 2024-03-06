@@ -60,12 +60,12 @@ public class PaymentTest {
     }
 
     @Test
-    void testCreatePaymentBankTransferMethod() {
+    void testCreatePaymentCodMethod() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("bankName", "mandiri");
-        paymentData.put("referenceCode", "abc");
-        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
-        assertEquals("BANK", payment.getMethod());
+        paymentData.put("address", "kujang");
+        paymentData.put("deliveryFee", "123");
+        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
+        assertEquals("COD", payment.getMethod());
     }
 
     @Test
@@ -109,49 +109,49 @@ public class PaymentTest {
     }
 
     @Test
-    void testCreatePaymentBankTransferValidData() {
+    void testCreatePaymentCodValidData() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("bankName", "mandiri");
-        paymentData.put("referenceCode", "abc123");
-        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
+        paymentData.put("address", "kujang");
+        paymentData.put("deliveryFee", "123");
+        Payment payment = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
     }
 
     @Test
-    void testCreatePaymentBankTransferMissingBankName() {
+    void testCreatePaymentCodMissingAddress() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("referenceCode", "abc123");
+        paymentData.put("deliveryFee", "123");
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
+            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
         });
     }
 
     @Test
-    void testCreatePaymentBankTransferMissingReferenceCode() {
+    void testCreatePaymentCodMissingDeliveryFee() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("bankName", "mandiri");
+        paymentData.put("address", "kujang");
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
+            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
         });
     }
 
     @Test
-    void testCreatePaymentBankTransferNullBankName() {
+    void testCreatePaymentCodNullAddress() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("bankName", null);
-        paymentData.put("referenceCode", "abc123");
+        paymentData.put("address", null);
+        paymentData.put("deliveryFee", "123");
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
+            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
         });
     }
 
     @Test
-    void testCreatePaymentBankTransferNullReferenceCode() {
+    void testCreatePaymentCodNullDeliveryFee() {
         Map<String, String> paymentData = new HashMap<>();
-        paymentData.put("bankName", "mandiri");
-        paymentData.put("referenceCode", null);
+        paymentData.put("address", "kujang");
+        paymentData.put("deliveryFee", null);
         assertThrows(IllegalArgumentException.class, () -> {
-            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData, order);
+            new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData, order);
         });
     }
 }

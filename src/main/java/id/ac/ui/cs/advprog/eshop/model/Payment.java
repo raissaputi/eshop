@@ -34,8 +34,8 @@ public class Payment {
     private void validatePaymentData() {
         if ("VOUCHER".equals(method)) {
             validateVoucherPaymentData();
-        } else if ("BANK".equals(method)) {
-            validateBankTransferPaymentData();
+        } else if ("COD".equals(method)) {
+            validateCodPaymentData();
         } else {
             throw new IllegalArgumentException("Invalid payment method");
         }
@@ -60,10 +60,10 @@ public class Payment {
         }
     }
 
-    private void validateBankTransferPaymentData() {
-        String bankName = paymentData.get("bankName");
-        String referenceCode = paymentData.get("referenceCode");
-        if (bankName == null || referenceCode == null || bankName.isEmpty() || referenceCode.isEmpty()) {
+    private void validateCodPaymentData() {
+        String address = paymentData.get("address");
+        String deliveryFee = paymentData.get("deliveryFee");
+        if (address == null || deliveryFee == null || address.isEmpty() || deliveryFee.isEmpty()) {
             throw new IllegalArgumentException();
         }
     }

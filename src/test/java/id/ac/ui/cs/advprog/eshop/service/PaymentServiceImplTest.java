@@ -46,9 +46,9 @@ public class PaymentServiceImplTest {
         payments.add(payment1);
 
         Map<String, String> paymentData2 = new HashMap<>();
-        paymentData2.put("bankName", "mandiri");
-        paymentData2.put("referenceCode", "abc");
-        Payment payment2 = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "BANK", paymentData2, order);
+        paymentData2.put("address", "kujang");
+        paymentData2.put("deliveryFee", "123");
+        Payment payment2 = new Payment("0176dc9d-3381-4b14-8705-8f66a8b86acf", "COD", paymentData2, order);
         payments.add(payment2);
     }
 
